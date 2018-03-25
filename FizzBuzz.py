@@ -6,4 +6,4 @@ for i in range(1,101): # loop for numbers 1 to 100
     elif i % 3 ==0:
         print('Fizz')
     else:
-        print(i)
+        print(i) # printing
