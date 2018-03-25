@@ -7,3 +7,4 @@ for i in range(1,101): # loop for numbers 1 to 100
         print('Fizz')
     else:
         print(i) # printing
+
