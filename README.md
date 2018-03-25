@@ -1,3 +1,4 @@
 # EPAM-homeworks
 
-Homeworks for EPAM python course
+Домашние задания по курсу питона в EPAM
+Буду размещать каждое дз в соответствующей папке в master ветке
