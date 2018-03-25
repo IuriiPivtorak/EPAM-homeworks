@@ -1,3 +1,3 @@
 # EPAM-homeworks
 
-# Homeworks for EPAM python course
+Homeworks for EPAM python course
