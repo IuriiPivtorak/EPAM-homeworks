@@ -10,7 +10,10 @@ tasks_marks = [] # list of lists for marks
 for student in students_names:
     task_marks = []
     for task in range(tasks_count):
-        task_mark = int(input('input mark for task {} for {}: '.format(task+1, student)))
+        task_mark = int(input('input mark for task {} for {}: '.format(task+1, student)))    
+        while task_mark <0 or task_mark > 10:
+            print('You must enter values from 0 to 10')
+            task_mark = int(input('input mark for task {} for {}: '.format(task+1, student)))
         task_marks.append(task_mark)
     tasks_marks.append(task_marks)
 
