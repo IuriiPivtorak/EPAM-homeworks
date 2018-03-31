@@ -43,7 +43,6 @@ def remove_contact():
     else:
         print(name, "was not found")
 
-
 def lookup_numbers():
     """ This function shows the name
     of the contact and all his of her
