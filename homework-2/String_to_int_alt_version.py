@@ -20,5 +20,7 @@ def transformation(string):
     # using concatenation formula to
     # unite 2 values into 1 repeatedly.
     for i in range(len(numbers) - 1):
-        x = x * 10 ** (math.floor(math.log10(numbers[i + 1])) + 1) + numbers[i + 1]
+        x = x * 10 ** (math.floor(
+            math.log10(numbers[i + 1])) + 1)\
+            + numbers[i + 1]
     return x
