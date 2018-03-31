@@ -2,14 +2,14 @@ import math
 
 def transformation(string):
     """ This function transforms string characters
-        into integer values and concatenates them
-        into single onebased on ASCII table.
+    into integer values and concatenates them
+    into single onebased on ASCII table.
 
-        :param string: String to use.
-        :type string: str.
-        :returns: int -- the return code.
-        :raises: TypeError
-        """
+    :param string: String to use.
+    :type string: str.
+    :returns: int -- the return code.
+    :raises: TypeError
+    """
     # decoding letters as int values
     # and storing them in a list.
     numbers = []
