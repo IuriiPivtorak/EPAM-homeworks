@@ -46,20 +46,19 @@ def union(*args):
     sets = []
     try:
         for i in args:
-            new_set = list(i)
-            sets.append(new_set)
-        int_set = sets[0]
+            new_set = i
+            sets.append(list(new_set))
+        int_set_1 = sets[0]
         # creating list of unique unified
         # elements of 2 sets,
         # uniting this list with next one, etc.
         for j in range(len(sets) - 1):
-            result = []
-            for i in int_set:
-                for k in sets[j + 1]:
-                    result.append(i)
-                    result.append(k)
-                    result = list(set(result))
-                    int_set = result[:]
-        return set(result)
+            int_set_2 = sets[j + 1]
+            for i in int_set_1:
+                for k in int_set_2:
+                    if i not in int_set_2:
+                        int_set_2.append(i)
+                        int_set_1 = int_set_2[:]
+        return list(int_set_2)
     except UnboundLocalError:
         print('use at least 2 sets')
