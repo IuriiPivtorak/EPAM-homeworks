@@ -1,5 +1,6 @@
 import math
 
+
 def transformation(string):
     """ This function transforms string characters
     into integer values and concatenates them

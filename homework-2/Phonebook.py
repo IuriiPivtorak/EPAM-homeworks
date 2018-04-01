@@ -11,6 +11,7 @@ def menu():
     print('4. Quit')
     print()
 
+
 def add_contact():
     """ This function add new person
     and his/her number in the phone book.
@@ -28,6 +29,7 @@ def add_contact():
     else:
         numbers[name] = [int(phone)]
 
+
 def remove_contact():
     """ This function deletes contact and
     his/her number(s) from the phone book.
@@ -42,6 +44,7 @@ def remove_contact():
         numbers.pop(name)
     else:
         print(name, "was not found")
+
 
 def lookup_numbers():
     """ This function shows the name

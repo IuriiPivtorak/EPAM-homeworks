@@ -1,4 +1,6 @@
 keys = []
+
+
 def select(*field_name: str):
     """ This function accepts field names
     and puts them in the list
@@ -11,8 +13,11 @@ def select(*field_name: str):
     global keys
     keys = [*field_name]
 
+
 dict_filter = {}
-def field_filter(field_name : str, collection: list):
+
+
+def field_filter(field_name: str, collection: list):
     """ This function accepts field name
     and a list of values from this field
     and puts them in dictionary of
@@ -26,6 +31,7 @@ def field_filter(field_name : str, collection: list):
     """
     global dict_filter
     dict_filter = {field_name: collection}
+
 
 def query(collection: list, select, *field_filter):
     """ This function chooses the selected fields,
