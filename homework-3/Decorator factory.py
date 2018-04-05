@@ -1,6 +1,9 @@
 #!/usr/bin/env
 
 
+import functools
+
+
 def dial(decorator):
     """ Function to turn on and
     off decorators.
@@ -9,6 +12,7 @@ def dial(decorator):
     :returns: function to decorate.
     """
     def new_decorator(func):
+
         decorated = decorator(func)
 
         def new_decorated(*args):
@@ -38,6 +42,7 @@ def factory(lambda_func):
     :returns: function to decorate.
     """
     def decorator(func):
+        @functools.wraps(func)
         def decorated2(*args):
             function = func(args[0])
             print(function)
@@ -57,6 +62,7 @@ def repeat(times):
     :returns: function to decorate.
     """
     def decorator(func):
+        @functools.wraps(func)
         def decorated2(*args):
             total = 0
             times = len(args[0])
