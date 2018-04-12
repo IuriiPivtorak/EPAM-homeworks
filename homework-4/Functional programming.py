@@ -2,6 +2,7 @@
 
 
 from itertools import islice
+import operator
 
 
 def get_data():
@@ -38,7 +39,7 @@ def get_top_students(data, course):
     # then with islice getting only top 3 students
     return islice(sorted([(item['name'], item['rate'])
                           for item in data if item['course'] == course],
-                         key=lambda x: x[1], reverse=True), 0, 3)
+                         key=operator.itemgetter(1), reverse=True), 0, 3)
 
 
 def get_students_top_table(course):
