@@ -1,0 +1,30 @@
+Using 'triangle_area'
+----------------------------------------
+
+Firstly, I import 'triangle_area'
+    >>> from _triangle_area_copy import triangle_area
+    >>> from unittest.mock import patch
+
+Now, I use it
+    >>> with patch('builtins.input', side_effect=['0 0', '1 0', '0 1']): triangle_area()
+    Decimal('0.500')
+
+Negative test for point on the same line
+    >>> with patch('builtins.input', side_effect=['0 0', '1 1', '3 3']): triangle_area()
+    Traceback (most recent call last):
+    ValueError: All points cannot lie on the same line!
+
+Negative test for wrong type of input
+    >>> with patch('builtins.input', side_effect=['a 1', '0 0', '3 3 ']): triangle_area()
+    Traceback (most recent call last):
+    ValueError: Please, use integer or float values only!
+
+Negative test for more than 2 coordinates
+    >>> with patch('builtins.input', side_effect=['1 1 1', '0 0', '3 3']): triangle_area()
+    Traceback (most recent call last):
+    IndexError: Please, input exactly 2 coordinates for each point!
+
+Negative test for same points
+    >>> with patch('builtins.input', side_effect=['0 0', '0 0', '1 1']): triangle_area()
+    Traceback (most recent call last):
+    ValueError: Points cannot be the same!
