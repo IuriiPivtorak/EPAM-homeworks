@@ -5,29 +5,42 @@ Similar files finder entrypoint
 
 import argparse
 import logging
+import sys
 
-import supertool
+from supertool.abc import comparison
 
 ROOT_LOGGER = logging.getLogger()
 
-if __name__=='__main__':
+if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Find similar files')
 
-    parser.add_argument('directory', type=str, help='target directory')
+    parser.add_argument('--directory', type=str, nargs='+', help='target directory')
     parser.add_argument('--verbose', help='enable debug output', action='store_true')
 
-    args = parser.parse_args()
+    args = parser.parse_args(sys.argv[1:])
 
-    if args.verbose:
+    if not args.verbose:
+        comparison(*args.directory)
         log_level = logging.DEBUG
+        hdlr = logging.FileHandler('log.txt')
+        formatter = logging.Formatter('%(asctime)s %(levelname)s %(message)s')
+        hdlr.setFormatter(formatter)
+
+        ROOT_LOGGER.addHandler(hdlr)
+
+        ROOT_LOGGER.setLevel(log_level)
+        ROOT_LOGGER.info('Everything is fine')
     else:
         log_level = logging.ERROR
 
-    ROOT_LOGGER.setLevel(log_level)
+        hdlr = logging.FileHandler('log.txt')
+        formatter = logging.Formatter('%(asctime)s %(levelname)s %(message)s')
+        hdlr.setFormatter(formatter)
 
-    # ROOT_LOGGER.addHandler(logging.FileHandler('log.txt'))
+        ROOT_LOGGER.addHandler(hdlr)
 
-    # ROOT_LOGGER.info('I am info message')
-    ROOT_LOGGER.critical('I am critical message!!')
+        ROOT_LOGGER.setLevel(log_level)
+
+        ROOT_LOGGER.critical('Something went wrong')
 
     print('I have been invoked with: {}'.format(args))
