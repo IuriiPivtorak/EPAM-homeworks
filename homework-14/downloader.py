@@ -56,7 +56,6 @@ def downloader(image_url, size, name, directory):
         file_counter += 1
         global bytes_downloaded
         bytes_downloaded += int(my_req.info()['Content-Length'])
-        del my_req
     except Exception as err:
         print('file {} error: {}'.format(name, err))
         os.remove(full_file_name)
@@ -121,4 +120,4 @@ if __name__ == '__main__':
         print('time took: {}'.format(timed))
 
     else:
-        print('Error: input links folder!')
+        raise FileNotFoundError('please, input links folder!')
