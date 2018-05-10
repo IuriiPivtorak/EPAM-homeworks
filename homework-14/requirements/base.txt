@@ -1,0 +1,4 @@
+Pillow == 5.1.0
+queue == 17.7.
+threading == 17.1.
+urllib == 21.5.
