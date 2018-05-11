@@ -1,3 +1,8 @@
+#!/usr/bin/env python
+"""
+Image downloader program
+"""
+
 import urllib.request
 from PIL import Image
 import os
