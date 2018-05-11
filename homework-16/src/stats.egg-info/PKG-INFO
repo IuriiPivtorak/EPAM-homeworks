@@ -1,0 +1,12 @@
+Metadata-Version: 1.1
+Name: stats
+Version: 0.1
+Summary: Package for statistical operations
+Home-page: UNKNOWN
+Author: Iurii Pivtorak
+Author-email: Pivtorakuv@yandex.ru
+License: MIT
+Description: UNKNOWN
+Platform: UNKNOWN
+Classifier: Topic :: Education
+Classifier: Programming Language :: Python :: 3.6
