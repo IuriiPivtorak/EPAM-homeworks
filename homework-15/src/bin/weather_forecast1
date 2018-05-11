@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 """
-Similar files finder for weather_copy.py
+Script for weather module
 """
 
 import argparse
