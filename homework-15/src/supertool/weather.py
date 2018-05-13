@@ -3,7 +3,6 @@ Weather report module
 
 """
 
-import sys
 import requests
 from nominatim import Nominatim
 
@@ -65,10 +64,14 @@ def weather_forecast(location, token_id):
                              ' for more info.'}:
         raise NameError('You have inputted invalid token id!')
     else:
-        print('weather forecast for 3 hours in {}: {}'.format(
-            location, data['list'][0]['weather'][0]['description']))
-        for i in data['list'][0]['main'].items():
-            print('{}: {}'.format(i[0], i[1]))
+        hours = 3
+        j = 0
+        while j < len(data['list']):
+            print('weather forecast for {} hours in {}: {}'.format(hours, location,
+                                                                   data['list'][j]['weather'][0]['description']))
+            print(*data['list'][j]['main'].items())
+            j += 1
+            hours += 3
 
 
 def nominatim_weather(location, token_id):
@@ -110,10 +113,15 @@ def nominatim_weather(location, token_id):
                 url_2 = 'http://api.openweathermap.org/data/2.5/forecast'
                 response_2 = requests.request('GET', url_2, params=querystring)
                 data_2 = response_2.json()
-                print('weather forecast for 3 hours in {}: {}'.format(
-                    location, data_2['list'][0]['weather'][0]['description']))
-                for i in data_2['list'][0]['main'].items():
-                    print('{}: {}'.format(i[0], i[1]))
+                hours = 3
+                j = 0
+                while j < len(data_2['list']):
+                    print('weather forecast for {} hours in {}: {}'.format(hours, location,
+                                                                           data_2['list'][j]['weather'][0][
+                                                                               'description']))
+                    print(*data_2['list'][j]['main'].items())
+                    j += 1
+                    hours += 3
         else:
             raise NameError('no such location found!')
     else:
