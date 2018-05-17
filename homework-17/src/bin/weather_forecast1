@@ -1,0 +1,48 @@
+#!/usr/bin/env python
+"""
+Script for weather module
+"""
+
+import argparse
+import logging
+
+from supertool.weather import weather, weather_forecast, nominatim_weather
+
+
+ROOT_LOGGER = logging.getLogger()
+
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description='weather report')
+
+    parser.add_argument('--command', type=str, nargs='?',
+                        help='function to use: "weather" for current,'
+                             ' "forecast" for forecast, "full_report" for full ',
+                        default='full_report')
+    parser.add_argument('-location', type=str, help='target location')
+    parser.add_argument('--token', type=str, help='your token id',
+                        default='b4a9d8e16b916107e741f1e84440c660')
+    args = parser.parse_args()
+
+    if args.location:
+        if args.command == 'full_report':
+            nominatim_weather(args.location, args.token)
+        elif args.command == 'weather':
+            weather(args.location, args.token)
+        elif args.command == 'forecast':
+            weather_forecast(args.location, args.token)
+        else:
+            print('Invalid command "{}"'.format(args.command))
+    else:
+        print('Please, input location')
+        log_level = logging.ERROR
+
+        hdlr = logging.FileHandler('log_weather.txt')
+        formatter = logging.Formatter('%(asctime)s %(levelname)s %(message)s')
+        hdlr.setFormatter(formatter)
+
+        ROOT_LOGGER.addHandler(hdlr)
+
+        ROOT_LOGGER.setLevel(log_level)
+
+        ROOT_LOGGER.critical('Something went wrong with following args {}'.format(args))

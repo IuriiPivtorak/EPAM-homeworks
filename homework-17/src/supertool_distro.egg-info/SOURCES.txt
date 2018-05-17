@@ -1,0 +1,17 @@
+setup.py
+bin/calculator_prog
+bin/similar_files
+bin/similar_files_GUI
+bin/weather_GUI
+bin/weather_forecast1
+supertool/__init__.py
+supertool/abc.py
+supertool/calc.py
+supertool/calculator.py
+supertool/weather.py
+supertool_distro.egg-info/PKG-INFO
+supertool_distro.egg-info/SOURCES.txt
+supertool_distro.egg-info/dependency_links.txt
+supertool_distro.egg-info/not-zip-safe
+supertool_distro.egg-info/requires.txt
+supertool_distro.egg-info/top_level.txt

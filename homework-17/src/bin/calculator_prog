@@ -1,0 +1,15 @@
+#!/usr/bin/env python
+"""
+Calculator script
+
+"""
+
+from supertool.calculator import *
+
+
+if __name__ == '__main__':
+    app = QtWidgets.QApplication(sys.argv)
+    window = MainApplication()
+    window.show()
+
+    sys.exit(app.exec_())
