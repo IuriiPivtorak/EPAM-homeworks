@@ -11,10 +11,13 @@ from supertool.weather import nominatim_weather
 
 
 class App(QMainWindow):
+    """
+    Class for application.
 
+    """
     def __init__(self):
         super().__init__()
-        self.title = 'Input location for weather report'
+        self.title = 'Input location and token id divided by ", "'
         self.left = 400
         self.top = 400
         self.width = 400
@@ -22,27 +25,38 @@ class App(QMainWindow):
         self.initUI()
 
     def initUI(self):
+        """
+        Textbox creation method
+
+        :returns: None -- shows textbox.
+        """
         self.setWindowTitle(self.title)
         self.setGeometry(self.left, self.top, self.width, self.height)
 
-        # Create textbox
         self.textbox = QLineEdit(self)
         self.textbox.move(20, 20)
         self.textbox.resize(280, 40)
 
-        # Create a button in the window
         self.button = QPushButton('Make forecast', self)
         self.button.move(20, 80)
 
-        # connect button to function on_click
         self.button.clicked.connect(self.on_click)
         self.show()
 
     @pyqtSlot()
     def on_click(self):
+        """
+        Sets operations when ok button is clicked.
+
+        :returns: None -- shows result of operation.
+        """
         info = self.textbox.text()
+        inputs = [str(s) for s in info.split(', ')]
+        location = inputs[0]
+        token_id = inputs[1]
+        print(inputs)
         sys.stdout = open('results.txt', 'w')
-        nominatim_weather(info, 'b4a9d8e16b916107e741f1e84440c660')
+        nominatim_weather(str(location), str(token_id))
         sys.stdout = sys.__stdout__
         with open('results.txt') as file:
             lines = file.readlines()
