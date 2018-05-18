@@ -7,29 +7,19 @@ import argparse
 import logging
 import sys
 
-from supertool.abc import comparison
+from supertool.abc import directory_check
 
 ROOT_LOGGER = logging.getLogger()
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Find similar files')
 
-    parser.add_argument('--directory', type=str, nargs='+', help='target directory')
-    parser.add_argument('--verbose', help='enable debug output', action='store_true')
+    parser.add_argument('--directory', type=str, help='target directory')
 
     args = parser.parse_args(sys.argv[1:])
 
-    if not args.verbose:
-        comparison(*args.directory)
-        log_level = logging.DEBUG
-        hdlr = logging.FileHandler('log.txt')
-        formatter = logging.Formatter('%(asctime)s %(levelname)s %(message)s')
-        hdlr.setFormatter(formatter)
-
-        ROOT_LOGGER.addHandler(hdlr)
-
-        ROOT_LOGGER.setLevel(log_level)
-        ROOT_LOGGER.info('Everything is fine')
+    if args.directory:
+        directory_check(args.directory)
     else:
         log_level = logging.ERROR
 
@@ -42,5 +32,3 @@ if __name__ == '__main__':
         ROOT_LOGGER.setLevel(log_level)
 
         ROOT_LOGGER.critical('Something went wrong')
-
-    print('I have been invoked with: {}'.format(args))

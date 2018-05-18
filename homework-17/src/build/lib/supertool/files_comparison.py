@@ -39,7 +39,7 @@ def comparison(*args):
     with open('aaa.txt', 'w') as file:
         print('who', file=file)
 
-    with open('bbb.txt', 'w') as file:
+    with open('bbb.txt.txt', 'w') as file:
         print('who', file=file)
 
     with open('ccc.txt', 'w') as file:
@@ -96,7 +96,7 @@ if __name__ == '__main__':
 
     with open('aaa.txt', 'w') as file:
         print('who', file=file)
-    with open('bbb.txt', 'w') as file:
+    with open('bbb.txt.txt', 'w') as file:
         print('who', file=file)
     with open('ccc.txt', 'w') as file:
         print('it is different file.', file=file)

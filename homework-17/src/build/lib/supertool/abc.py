@@ -3,35 +3,35 @@ File comparison module.
 
 """
 
-
+import os
 import hashlib
 
 
-def comparison(*args):
+def directory_check(directory):
     """
-    Hashes files and prints number of same files
-    with their names.
+    Searches for files in directory and compares them.
 
-    :param args: names of files.
-    :type args: str.
+    :param directory: directory path.
+    :type directory: str.
     :returns: list of lists -- number of same files with their names.
     """
-    my_list = {}
+    list_of_files = {}
     try:
-        for arg in args:
-            with open(arg, 'rb') as file:
-                hasher = hashlib.md5()
-                buf = file.read()
-                hasher.update(buf)
-                data = hasher.hexdigest()
-                if data in my_list.keys():
-                    my_list[data].append(str(arg))
-                else:
-                    my_list[data] = [arg]
+        files = os.listdir(directory)
     except FileNotFoundError:
-        raise FileNotFoundError('File does not exist!')
+        raise FileNotFoundError('No such directory!')
+    for f in files:
+        with open(os.path.join(directory, f), 'rb') as file:
+            hasher = hashlib.md5()
+            buf = file.read()
+            hasher.update(buf)
+            data = hasher.hexdigest()
+            if data in list_of_files.keys():
+                list_of_files[data].append(str(f))
+            else:
+                    list_of_files[data] = [f]
     result = []
-    for i in my_list.values():
+    for i in list_of_files.values():
         x = len(i)
         result.append([x, [j for j in i]])
     for res in sorted(result, reverse=True):

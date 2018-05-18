@@ -5,8 +5,10 @@ Weather forecast script with UI
 
 import os
 import sys
+import logging
 from PyQt5.QtWidgets import QMainWindow, QApplication, QPushButton, QLineEdit, QMessageBox
 from PyQt5.QtCore import pyqtSlot
+
 from supertool.weather import nominatim_weather
 
 
@@ -50,26 +52,40 @@ class App(QMainWindow):
 
         :returns: None -- shows result of operation.
         """
-        info = self.textbox.text()
-        inputs = [str(s) for s in info.split(', ')]
-        location = inputs[0]
-        token_id = inputs[1]
-        print(inputs)
-        sys.stdout = open('results.txt', 'w')
-        nominatim_weather(str(location), str(token_id))
-        sys.stdout = sys.__stdout__
-        with open('results.txt') as file:
-            lines = file.readlines()
-            result = ''
-            for line in lines:
-                result += str(line)
-            QMessageBox.question(self, 'Weather forecast', result, QMessageBox.Ok,
-                                 QMessageBox.Ok)
-            self.textbox.setText('')
-        os.remove('results.txt')
+        try:
+            info = self.textbox.text()
+            inputs = [str(s) for s in info.split(', ')]
+            location = inputs[0]
+            token_id = inputs[1]
+            print(inputs)
+            sys.stdout = open('results.txt', 'w')
+            nominatim_weather(str(location), str(token_id))
+            sys.stdout = sys.__stdout__
+            with open('results.txt') as file:
+                lines = file.readlines()
+                result = ''
+                for line in lines:
+                    result += str(line)
+                QMessageBox.question(self, 'Weather forecast', result, QMessageBox.Ok,
+                                     QMessageBox.Ok)
+                self.textbox.setText('')
+        finally:
+            os.remove('results.txt')
 
 
 if __name__ == '__main__':
-    app = QApplication(sys.argv)
-    ex = App()
-    sys.exit(app.exec_())
+
+    ROOT_LOGGER = logging.getLogger()
+
+    try:
+        app = QApplication(sys.argv)
+        ex = App()
+        sys.exit(app.exec_())
+    except Exception as err:
+        log_level = logging.ERROR
+        hdlr = logging.FileHandler('log.txt')
+        formatter = logging.Formatter('%(asctime)s %(levelname)s %(message)s')
+        hdlr.setFormatter(formatter)
+        ROOT_LOGGER.addHandler(hdlr)
+        ROOT_LOGGER.setLevel(log_level)
+        ROOT_LOGGER.critical(err)
